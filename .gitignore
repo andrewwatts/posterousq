@@ -1,6 +1,16 @@
-*.pyc
 *~
+*.db
+*.pid
+*.pyc
 
 .DS_Store
 .project
 .pydevproject
+.settings
+
+pip-log.txt
+settings.py
+
+celerybeat-schedule*
+
+

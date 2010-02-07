@@ -1,0 +1,85 @@
+{% extends "posterousq/base.html" %}
+{% block main %}
+    <div id="posts_calendar"></div>
+    <div id="dialog"></div>
+    <script type="text/javascript">
+    (function($){
+        
+        $.fn.refresh_calendar = function(){
+            return this.each(function(){
+                $.ajax({
+                    url: '/post',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response, status, xhr){
+                        // add events to the calendar
+                        $('#posts_calendar').fullCalendar('removeEvents');
+                        for(var key in response.data){
+                            var record = response.data[key],
+                                event = {
+                                    id: record.pk,
+                                    title: record.fields.title,
+                                    start: record.fields.timestamp
+                                };
+                            $('#posts_calendar').fullCalendar('renderEvent', event);
+                        }
+                    },
+                    error: function(xhr, status, error){
+                        console.log(status + ': ' + error);
+                    }
+                });
+            });
+        }
+        
+        function load_dialog(date, id){
+            var $dialog = $('<div></div>');
+            if (id){
+                $dialog.load('/form/'+id);
+            }
+            else {
+                $dialog.load('/form');
+            }
+            $('#dialog').append($dialog);
+            $dialog.dialog({ 
+                closeOnEscape: true,
+                modal: true,
+                position: 'center',
+                height: 500,
+                width: 550,
+                title: $.fullCalendar.formatDate(new Date(date), 'dddd MMMM dd, yyyy'),
+                close: function(event, ui){
+                    $(document).refresh_calendar();
+                    $.removeData(document.body, 'dialog');
+                    $dialog.remove();
+                }
+            });
+            $.data($dialog, 'id', id);
+            $.data($dialog, 'date', date);
+            $.data(document.body, 'dialog', $dialog);
+            return $dialog;
+        }
+        
+        $(function(){
+            $posts_calendar = $('#posts_calendar').fullCalendar({
+                theme: true,
+                header: {
+                    left: 'title',
+                    right: 'prev,next'  
+                },
+                weekMode: 'variable',
+                dayClick: function(date, allDay, jsEvent, view){
+                    load_dialog(date);
+                },
+                eventClick: function(event, jsEvent, view){
+                    var $dialog = load_dialog(event.start, event.id);
+                },
+                viewDisplay: function(view) {
+                    $(document).refresh_calendar();
+                }
+            });
+            
+            $(document).refresh_calendar();
+        });
+    })(jQuery);
+    </script>
+{% endblock main %}

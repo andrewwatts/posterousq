@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <title>Posterous Q</title>
+    
+    <!-- blueprint -->
+    <link rel="stylesheet" href="{{MEDIA_URL}}/posterousq/css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="{{MEDIA_URL}}/posterousq/css/blueprint/print.css" type="text/css" media="print">    
+    <!--[if lt IE 8]
+        <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
+    <![endif]-->
+    
+    <!-- jquery-ui -->
+    <link rel="stylesheet" href="{{MEDIA_URL}}/posterousq/css/jqueryui/sunny/ui.theme.css" type="text/css">
+    
+    <!-- fullcalendar -->
+    <link rel="stylesheet" href="{{MEDIA_URL}}/posterousq/css/fullcalendar/fullcalendar.css" type="text/css">
+    
+    <!-- posterousq -->
+    <link rel="stylesheet" href="{{MEDIA_URL}}/posterousq/css/posterousq/posterousq.css" type="text/css">
+    
+    {% block style %}{% endblock style %}
+
+    <!-- jquery -->
+    <script type="text/javascript" src="{{MEDIA_URL}}/posterousq/js/jquery/jquery-1.4.1.min.js"></script>
+    <script type="text/javascript" src="{{MEDIA_URL}}/posterousq/js/jqueryui/jquery-ui-1.8rc1.min.js"></script>
+    
+    <!-- jquery-form -->
+    <script type="text/javascript" src="{{MEDIA_URL}}/posterousq/js/jquery-form/jquery.form.js"></script>
+    
+    <!-- fullcalendar -->
+    <script type="text/javascript" src="{{MEDIA_URL}}/posterousq/js/fullcalendar/fullcalendar.min.js"></script>
+
+    <!-- posterousq -->    
+    <script type="text/javascript" src="{{MEDIA_URL}}/posterousq/js/posterousq/posterousq.js"></script>
+    
+    {% block script %}{% endblock script %}
+  
+</head>
+<body>
+<div class="container">
+    <div class="span-24">
+        <div id="head">
+            <h1>Posterous Q</h1>
+        </div>
+    </div>
+    <div class="span-24">
+        {% block main %}{% endblock main %}
+    </div>
+    <div class="span-24">
+        <div id="foot">
+            <p>&copy; 2010 d3w4rd</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<form id="post_form" action="/post" method="post" enctype="multipart/form-data">
+    <table>
+        {{form.as_table}}
+    </table>
+    <div class="form actions">
+        <button type="reset"><span>Cancel</span></button>
+        {% if form.instance.id %}
+        <button type="button" class="delete"><span>Delete</span></button>
+        {% endif %}
+        <button type="submit"><span>Queue</span></button>
+    </div>
+    <script type="text/javascript">
+    (function($){
+        $(function(){
+            
+            var $dialog = $.data(document.body, 'dialog'),
+                $post_form = $('#post_form'),
+                $action_div = $('#post_form div.actions'),
+                $reset_button = $('button[type="reset"]', $action_div),
+                $delete_button = $('button.delete', $action_div);
+            
+            $('button', $action_div).addClass('ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only');
+            $('button span', $action_div).addClass('ui-button-text');
+            
+            $reset_button.click(function(){
+                $dialog.dialog('close'); 
+            });
+            
+            $delete_button.click(function(){
+                
+                $.ajax({
+                    url: '/post/'+$.data($dialog, 'id'),
+                    type: 'DELETE',
+                    dataType: 'json',
+                    success: function(response, status, xhr){
+                        $(document).refresh_calendar();
+                    },
+                    error: function(xhr, status, error){
+                        console.log(status + ': ' + error);
+                    }
+                });
+
+                $dialog.dialog('close'); 
+            });
+            
+            $post_form.submit(function(){
+                
+                function _show_errors(errors){
+                    for(var key in errors){
+                        $('#id_'+key).after(function(i){
+                            var error_str = '<div class="ui-state-error">'+errors[key]+'</div>';
+                            $(this).next().remove();
+                            return error_str;
+                        });
+                    }
+                }
+                
+                var url = $(this).attr('action'),
+                    data = $(this).serialize(),
+                    success = function(response, status, xhr){
+                        if(response.valid === true){
+                            $dialog.dialog('close');
+                        }
+                        else{
+                            _show_errors(response.data);
+                        }
+                    },
+                    error = function(xhr, status, error){
+                        var response = eval('[' + xhr.responseText + ']')[0];
+                        _show_errors(response.data);
+                    },
+                    ajax_options = {
+                        url: url,
+                        type: 'POST',
+                        dataType: 'json',
+                        success: success,
+                        error: error
+                    };
+                    
+                // using the jquery.form plugin to handle file uploads
+                $(this).ajaxSubmit(ajax_options);
+
+                return false; 
+            });
+            
+            $('#id_timestamp_0').val($.fullCalendar.formatDate(new Date($.data($dialog, 'date')), 'MM/dd/yyyy'));
+            if ($('#id_timestamp_1').val() === ''){
+                $('#id_timestamp_1').val(new Date().toLocaleTimeString());                
+            }
+        });
+    })(jQuery);
+    </script>
+</form>

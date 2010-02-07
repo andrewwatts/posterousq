@@ -1,0 +1,71 @@
+
+/** */
+h3.ui-accordion-header {
+    border-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+div.ui-accordion-content {
+    margin-bottom: 1em;
+}
+
+/** fc styling */
+.fc-header span.ui-icon {
+    margin: auto;
+}
+
+/** action bar styling */
+.form.actions {
+    overflow: hidden;
+    width: 100%;
+}
+    .form.actions button {
+        float: right;
+        padding: 0.2em 0.6em 0.3em;
+    }
+
+/** form styling */
+input[type="text"], input[type="password"], 
+input.text, input.title, textarea, select{
+    -moz-border-radius: 6px;
+    border: 1px solid #BBBBBB;
+    color: #666666;
+    font-size:11px;
+    height:22px;
+    line-height:22px;
+    margin:2px 0 2px 2px;
+    padding: 0px 10px;
+    width: 380px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, 
+input.text:focus, input.title:focus, textarea:focus, select:focus{
+    border: 1px solid #BBBBBB;
+}
+
+textarea {
+    height: 100px;
+}
+
+div.uploader {
+    width: 405px;
+}
+
+    div.uploader input {
+        width: 405px;
+    }
+    
+    div.uploader span.filename {
+        width: 297px;
+    }
+    
+/** post_form styling */
+#post_form div.ui-state-error {
+    -moz-border-radius: 6px;
+    font-size: 11px;
+    height: 22px;
+    line-height: 22px;
+    margin: 2px 0 2px 2px;
+    padding: 0px 10px;
+    width: 380px;
+}
