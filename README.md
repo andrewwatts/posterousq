@@ -26,7 +26,6 @@ Getting Started
 
         cd posterousq
         cp settings.py.sample settings.python
-
    At a minimum you'll need to define your posterous username (email address)
    and password, and if you have more than one site, and do not want your
    posts going to your default site, the site id.
@@ -34,7 +33,6 @@ Getting Started
         POSTEROUS_USERNAME = 'yourname@emailaddress.com'
         POSTEROUS_PASSWORD = 'yourpassword'
         POSTEROUS_SITE_ID = 'optional_site_id'
-
    and modify your database settings appropriately for your database
    configuration
    
@@ -44,7 +42,6 @@ Getting Started
         DATABASE_PASSWORD = ''         
         DATABASE_HOST = ''             
         DATABASE_PORT = ''   
-
 
 5. Install and/or sync your database
 
@@ -56,7 +53,6 @@ Getting Started
 
         ./manage.py celeryd -B
         ./manage.py runserver
-        
    For more formal deployment options, you're on your own, but there are 
    plenty of howto's in the [celery cookbook][] and [django docs][]. And 
    remember you could be dealing with some large files, so you'll need to
