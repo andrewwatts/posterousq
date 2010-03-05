@@ -25,7 +25,7 @@ Getting Started
    `settings.py.sample`, copy it to `settings.py` before editing:
 
         cd posterousq
-        cp settings.py.sample settings.python
+        cp settings.py.sample settings.py
    At a minimum you'll need to define your posterous username (email address)
    and password, and if you have more than one site, and do not want your
    posts going to your default site, the site id.
