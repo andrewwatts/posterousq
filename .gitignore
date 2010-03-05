@@ -5,12 +5,14 @@
 *.pyc
 
 .DS_Store
+.fabricrc
 .project
 .pydevproject
 .settings
 
 pip-log.txt
 settings.py
+fabfile.py
 
 celerybeat-schedule*
 
